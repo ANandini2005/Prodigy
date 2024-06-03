@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Navigation Menu</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  #navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+  }
+  #navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  #navbar li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  #navbar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  #navbar a:hover {
+    background-color: #0056b3;
+  }
+  .scrolled {
+    background-color: #0056b3 !important;
+  }
+  .content {
+    display: none;
+    padding-top: 60px; /* Adjust according to navbar height */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div id="navbar">
+  <ul>
+    <li><a href="#home" class="menu-item">Home</a></li>
+    <li><a href="#about" class="menu-item">About</a></li>
+    <li><a href="#services" class="menu-item">Services</a></li>
+    <li><a href="#contact" class="menu-item">Contact</a></li>
+  </ul>
+</div>
+
+<div id="home" class="content active" style="background-color: #35dce2;">
+  <h1>Welcome to Our Website</h1>
+  <p>Welcome to our website. We are dedicated to providing the best services to our customers.</p>
+  <p>Explore our website to learn more about what we offer!</p>
+</div>
+
+<div id="about" class="content" style="background-color: #8414c1;">
+  <h1>About Us</h1>
+  <p>We are a team of professionals committed to delivering high-quality services to our clients.</p>
+  <p>Our mission is to exceed customer expectations and build long-term relationships based on trust and satisfaction.</p>
+</div>
+
+<div id="services" class="content" style="background-color: #21c7b4;">
+  <h1>Our Services</h1>
+  <p>We offer a wide range of services to meet the needs of our clients. Our services include:</p>
+  <ul>
+    <li>Web Design</li>
+    <li>Graphic Design</li>
+    <li>Digital Marketing</li>
+    <li>Consulting Services</li>
+    <li>And much more...</li>
+  </ul>
+</div>
+
+<div id="contact" class="content" style="background-color: #348fb3;">
+  <h1>Contact Us</h1>
+  <p>Feel free to get in touch with us for any inquiries or to discuss your project requirements.</p>
+  <p>You can reach us via phone, email, or by filling out the contact form on our website.</p>
+  <p>We look forward to hearing from you!</p>
+</div>
+
+<script>
+  var menuItems = document.querySelectorAll('.menu-item');
+  var contents = document.querySelectorAll('.content');
+
+  menuItems.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = item.getAttribute('href').substring(1);
+      contents.forEach(function(content) {
+        if (content.id === targetId) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+      // Smooth scrolling to the target section
+      document.getElementById(targetId).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
